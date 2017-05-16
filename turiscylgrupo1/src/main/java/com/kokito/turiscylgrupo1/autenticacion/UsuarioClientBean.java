@@ -42,7 +42,7 @@ public class UsuarioClientBean {
     @PostConstruct
     public void init() {
         client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/TurisCyLGrupo1/webresources/com.kokito.pruebas.entities.usuario");
+        target = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.usuario");
     }
 
     @PreDestroy
@@ -78,7 +78,7 @@ public class UsuarioClientBean {
 
     public void deleteUsuario() {
         //target auxiliar para eliminar en grupos para hacer login
-        WebTarget target_aux = client.target("http://localhost:8080/TurisCyLGrupo1/webresources/com.kokito.pruebas.entities.grupos");
+        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.grupos");
         target.path("{id}").resolveTemplate("id", bean.getId()).request().delete();
         target_aux.path("{usuario}").resolveTemplate("usuario", bean.getUsuario()).request().delete();
     }
@@ -90,7 +90,7 @@ public class UsuarioClientBean {
         }
         Usuario m = new Usuario();
         //target auxiliar para añadir en grupos para hacer login
-        WebTarget target_aux = client.target("http://localhost:8080/TurisCyLGrupo1/webresources/com.kokito.pruebas.entities.grupos");
+        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.grupos");
         m.setId(1);
         m.setUsuario(bean.getUsuario());
         m.setPassword(crypt(bean.getPassword()));
