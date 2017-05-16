@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/template_login.xhtml">
+
+            <ui:define name="content">
+                <h:form prependId="false">
+                    <p:panel header="Por favor, introduzca los siguientes datos">
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <!--usuario-->
+                            <h:outputLabel for="usuario" value="Usuario: * "/>
+                            <p:inputText id="usuario" value="#{usuarioBackingBean.usuario}" label="Usuario" required="true">
+                                <f:validateLength minimum="3" maximum="32"/>
+                            </p:inputText>
+                            <p:message for="usuario" />
+                            
+                            <!--password-->
+                            <h:outputLabel for="password" value="Contraseña: *" />
+                            <p:password id="password" value="#{usuarioBackingBean.password}" feedback="true" match="pwd2" required="true">
+                                <f:validateLength minimum="8" />
+                            </p:password>
+                            <p:message for="password" />
+                            <h:outputLabel for="pwd2" value="Repetir contraseña: *" />
+                            <p:password id="pwd2" value="#{usuarioBackingBean.password}" label="Repetir contraseña" required="true">
+                                <f:validateLength minimum="8" />
+                            </p:password> 
+                            <p:message for="pwd2" />
+                            
+                            <!-- nombre-->
+                            <h:outputLabel for="nombre" value="Nombre: " />
+                            <p:inputText id="nombre" value="#{usuarioBackingBean.nombre}" label="Nombre">
+                                <f:validateLength  maximum="20"/>
+                            </p:inputText>
+                            <p:message for="nombre" />
+
+                            <!-- apellidos-->
+                            <h:outputLabel for="apellidos" value="Apellidos: " />
+                            <p:inputText id="apellidos" value="#{usuarioBackingBean.apellidos}" label="Apellidos">
+                                <f:validateLength  maximum="30"/>
+                            </p:inputText>
+                            <p:message for="apellidos" />
+
+                            <!-- edad-->
+                            <h:outputLabel for="edad" value="Edad: " />
+                            <p:inputText id="edad" value="#{usuarioBackingBean.edad}" label="Edad"/>
+                            <p:message for="edad" />
+
+                            <!-- provincia de residencia-->
+                            <h:outputLabel for="provincia" value="Provincia de residencia: " />
+                            <p:inputText id="provincia" value="#{usuarioBackingBean.provincia}" label="Provincia de residencia">
+                                <f:validateLength  maximum="30"/>
+                            </p:inputText>
+                            <p:message for="provincia" />
+
+                            <!-- organizador de eventos (si se marca esta casilla el sistema tendría que acceder 
+                            al servico REST de JCYL para comprobar si es organizador de eventos-->
+                            <h:outputLabel for="isOrganizador" value="¿Eres organizador de eventos? " />
+                            <p:selectBooleanButton id="isOrganizador" value="#{usuarioBackingBean.isOrganizador}" onLabel="Si" offLabel="No" style="width:60px" />
+                        </h:panelGrid>
+                        <p:commandButton value="Registro" ajax="false" icon="ui-icon-check" validateClient="true" action="login" actionListener="#{usuarioClientBean.addUsuario()}"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

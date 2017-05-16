@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <c:forEach items="#{usuarioClientBean.usuarios}" var="u">
+                    <c:set var ="usuario" scope = "session" value = "#{request.remoteUser}"/>
+                    <c:set var="login" scope="session" value="#{u.usuario}"/>
+                    <c:if test="#{usuario == login}">
+                        <h3>Perfil de #{u.usuario}</h3>
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/img/profile.png" style="max-width: 15%; max-width: 15%;"/>
+                            </f:facet>
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{u.nombre}" />
+                            <h:outputText value="Apellidos: " />
+                            <h:outputText value="#{u.apellidos}" />
+                            <h:outputText value="Edad: " />
+                            <h:outputText value="#{u.edad}" />
+                            <h:outputText value="Provincia de residencia: " />
+                            <h:outputText value="#{u.provincia}"/>
+                            <h:form prependId="false">
+                                <p:commandButton value="Modificar" icon="ui-icon-pencil" action="modificar"/>
+                                <p:commandButton value="Eliminar" icon="ui-icon-trash" 
+                                                 update="#{usuarioBackingBean.setId(u.id)}#{usuarioBackingBean.setUsuario(u.usuario)}" 
+                                                 actionListener="#{usuarioClientBean.deleteUsuario()}" 
+                                                 onclick="window.location.href = '#{request.contextPath}' + '/logout'">
+                                    <p:confirm header="Confirmar" message="¿Seguro que deseas eliminar la cuenta? No queremos que te vayas T_T" icon="ui-icon-alert" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                            
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </h:form>
+                        </p:panelGrid>
+                    </c:if>
+                </c:forEach>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
