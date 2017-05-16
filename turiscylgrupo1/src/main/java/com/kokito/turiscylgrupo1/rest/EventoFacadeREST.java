@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Sergio
+ * @author coco7
  */
 @Named
 @Stateless

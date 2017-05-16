@@ -8,7 +8,6 @@ package com.kokito.turiscylgrupo1.rest;
 import com.kokito.turiscylgrupo1.entities.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -23,9 +22,8 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Sergio
+ * @author coco7
  */
-@Named
 @Stateless
 @Path("com.kokito.turiscylgrupo1.entities.usuario")
 public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
