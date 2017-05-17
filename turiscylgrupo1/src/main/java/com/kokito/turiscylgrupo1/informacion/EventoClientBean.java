@@ -54,7 +54,7 @@ public class EventoClientBean {
         m.setHoraFin(bean.getFecha_fin());
         m.setDescripcion(bean.getDescripcion());
         //target.register(UsuarioWriter.class).request().put(Entity.entity(m, MediaType.APPLICATION_JSON)); 
-        target.path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
+        target.register(EventoWriter.class).path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
     }
 
     public void deleteEvento() {
