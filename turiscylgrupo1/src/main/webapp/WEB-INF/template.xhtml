@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="${facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="${facesContext.externalContext.requestContextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>TurisCyL</title>
+    </h:head>
+
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="35" resizable="false" closable="false" collapsible="false"> 
+                <h1>
+                    <h:outputText value="TurisCyL" style="text-align: center;"/>
+                </h1>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" >
+                <h:form id="menu">
+                    <!-- añadimos menú. Hemos decidido ponerlo en un menúbar, ya que creemos que parece mas actual que un menú lateral-->
+                    <p:growl id="messages"/>
+                    <p:menubar><!-- creamos el menúbar-->
+                        <p:menuitem value="Inicio" icon="ui-icon-home" url="/faces/index.xhtml"/>
+                        <c:if test="#{request.isUserInRole('organizador')==true ||request.isUserInRole('turista')==true}">
+                            <p:menuitem value="Contratar oferta" url="/faces/informacion/eventos.xhtml"/>
+                        </c:if>
+                        <p:menuitem value="Chat" url="/faces/chat/chat.xhtml" icon="ui-icon-comment"/>
+                        <!-- link para ir a parte de organizador-->
+                        <c:if test="#{request.isUserInRole('organizador')==true}">
+                            <p:submenu label="Gestión  de eventos" icon="ui-icon-wrench" >
+                                <p:menuitem value="Añadir evento" url="/faces/organizador/addEvento.xhtml" />
+                                <p:menuitem value="Ver eventos" url="/faces/organizador/eventos.xhtml" />
+                            </p:submenu>
+                        </c:if>
+                        <!-- link mi perfil-->
+                        <c:if test="#{request.isUserInRole('organizador')==true ||request.isUserInRole('turista')==true}">
+                            <p:menuitem value="Mi perfil" url="/faces/informacion/perfil.xhtml" icon="ui-icon-person"/>
+                        </c:if>
+
+                        <!-- botones de login, registro, logout-->
+                        <f:facet name="options">    
+                            <c:if test="#{request.remoteUser!=null}">
+                               <!--<p:button value="Salir" icon="ui-icon-extlink" onclick="window.location.href = '#{request.contextPath}' + '/logout'"/>-->
+                                <a href="#{request.contextPath}/logout" icon="ui-icon-extlink">
+                                <p:button value="Salir"/>
+                                </a>
+                            </c:if>
+                            <!--<p:inputText style="margin-right:10px" placeholder="Search"/>-->  
+                            <c:if test="#{request.remoteUser==null}">
+                                <p:commandButton type="button" value="Identificate" icon="ui-icon-key" 
+                                                 onclick="window.location.href = 'http://localhost:8080/turiscylgrupo1/faces/login.xhtml';"/>
+                                <p:commandButton type="button" value="Registrate" icon="ui-icon-circle-plus" 
+                                                 onclick="window.location.href = 'http://localhost:8080/turiscylgrupo1/faces/registro.xhtml';"/>
+                            </c:if>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+                <ui:insert name="content">
+
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
