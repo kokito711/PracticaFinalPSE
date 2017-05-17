@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kokito.TurisCyLGrupo1.autenticacion;
+package com.kokito.turiscylgrupo1.autenticacion;
 
 import com.kokito.turiscylgrupo1.entities.Grupos;
 import com.kokito.turiscylgrupo1.entities.Usuario;
-import com.kokito.TurisCyLGrupo1.json.EventoWriter;
-import com.kokito.TurisCyLGrupo1.json.GruposWriter;
-import com.kokito.TurisCyLGrupo1.json.UsuarioReader;
-import com.kokito.TurisCyLGrupo1.json.UsuarioWriter;
+import com.kokito.turiscylgrupo1.json.EventoWriter;
+import com.kokito.turiscylgrupo1.json.GruposWriter;
+import com.kokito.turiscylgrupo1.json.UsuarioReader;
+import com.kokito.turiscylgrupo1.json.UsuarioWriter;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.annotation.PostConstruct;
@@ -42,7 +43,7 @@ public class UsuarioClientBean {
     @PostConstruct
     public void init() {
         client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.usuario");
+        target = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.turiscylgrupo1.entities.usuario");
     }
 
     @PreDestroy
@@ -78,7 +79,7 @@ public class UsuarioClientBean {
 
     public void deleteUsuario() {
         //target auxiliar para eliminar en grupos para hacer login
-        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.grupos");
+        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.turiscylgrupo1.entities.grupos");
         target.path("{id}").resolveTemplate("id", bean.getId()).request().delete();
         target_aux.path("{usuario}").resolveTemplate("usuario", bean.getUsuario()).request().delete();
     }
@@ -90,7 +91,7 @@ public class UsuarioClientBean {
         }
         Usuario m = new Usuario();
         //target auxiliar para añadir en grupos para hacer login
-        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.grupos");
+        WebTarget target_aux = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.turiscylgrupo1.entities.grupos");
         m.setId(1);
         m.setUsuario(bean.getUsuario());
         m.setPassword(crypt(bean.getPassword()));
@@ -98,7 +99,7 @@ public class UsuarioClientBean {
         m.setApellidos(bean.getApellidos());
         m.setEdad(bean.getEdad());
         m.setProvincia(bean.getProvincia());
-        target.register(EventoWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
+        target.register(UsuarioWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
         //target.register(UsuarioWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
         Grupos g = new Grupos();
         if (bean.isIsOrganizador()) {

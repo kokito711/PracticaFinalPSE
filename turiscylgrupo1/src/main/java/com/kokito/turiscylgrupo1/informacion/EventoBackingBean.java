@@ -1,4 +1,4 @@
-package com.kokito.TurisCyLGrupo1.informacion;
+package com.kokito.turiscylgrupo1.informacion;
 
 import java.io.Serializable;
 import java.util.Date;

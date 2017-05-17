@@ -1,4 +1,4 @@
-package com.kokito.TurisCyLGrupo1.LazyTable;
+package com.kokito.turiscylgrupo1.LazyTable;
  
 import com.kokito.turiscylgrupo1.entities.Evento;
 import java.util.Comparator;

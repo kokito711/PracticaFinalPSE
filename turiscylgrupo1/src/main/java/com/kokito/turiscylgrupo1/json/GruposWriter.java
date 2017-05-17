@@ -1,4 +1,4 @@
-package com.kokito.TurisCyLGrupo1.json;
+package com.kokito.turiscylgrupo1.json;
 
 import com.kokito.turiscylgrupo1.entities.Grupos;
 import java.io.IOException;

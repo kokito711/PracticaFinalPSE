@@ -1,8 +1,8 @@
-package com.kokito.TurisCyLGrupo1.LazyTable;
+package com.kokito.turiscylgrupo1.LazyTable;
 
  
 import com.kokito.turiscylgrupo1.entities.Evento;
-import com.kokito.TurisCyLGrupo1.informacion.EventoClientBean;
+import com.kokito.turiscylgrupo1.informacion.EventoClientBean;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

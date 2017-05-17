@@ -1,8 +1,9 @@
-package com.kokito.TurisCyLGrupo1.informacion;
+package com.kokito.turiscylgrupo1.informacion;
 
 import com.kokito.turiscylgrupo1.entities.Evento;
-import com.kokito.TurisCyLGrupo1.json.EventoReader;
-import com.kokito.TurisCyLGrupo1.json.EventoWriter;
+import com.kokito.turiscylgrupo1.json.EventoReader;
+import com.kokito.turiscylgrupo1.json.EventoWriter;
+
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -28,7 +29,7 @@ public class EventoClientBean {
     @PostConstruct
     public void init() {
         client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.pruebas.entities.evento");
+        target = client.target("http://localhost:8080/turiscylgrupo1/webresources/com.kokito.turiscylgrupo1.entities.evento");
     }
 
     @PreDestroy

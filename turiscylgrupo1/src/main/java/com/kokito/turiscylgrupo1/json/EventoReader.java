@@ -1,4 +1,4 @@
-package com.kokito.TurisCyLGrupo1.json;
+package com.kokito.turiscylgrupo1.json;
 
 import com.kokito.turiscylgrupo1.entities.Evento;
 import java.io.IOException;
@@ -25,7 +25,6 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-
 public class EventoReader implements MessageBodyReader<Evento> {
 
     @Override
