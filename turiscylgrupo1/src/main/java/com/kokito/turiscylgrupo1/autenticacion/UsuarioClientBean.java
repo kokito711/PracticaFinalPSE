@@ -7,7 +7,6 @@ package com.kokito.turiscylgrupo1.autenticacion;
 
 import com.kokito.turiscylgrupo1.entities.Grupos;
 import com.kokito.turiscylgrupo1.entities.Usuario;
-import com.kokito.turiscylgrupo1.json.EventoWriter;
 import com.kokito.turiscylgrupo1.json.GruposWriter;
 import com.kokito.turiscylgrupo1.json.UsuarioReader;
 import com.kokito.turiscylgrupo1.json.UsuarioWriter;
@@ -66,15 +65,15 @@ public class UsuarioClientBean {
             digester = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
         }
-            m.setId(bean.getId());
-            m.setUsuario(bean.getUsuario());
-            m.setPassword(crypt(bean.getPassword()));
-            m.setNombre(bean.getNombre());
-            m.setApellidos(bean.getApellidos());
-            m.setEdad(bean.getEdad());
-            m.setProvincia(bean.getProvincia());
-            //target.register(UsuarioWriter.class).request().put(Entity.entity(m, MediaType.APPLICATION_JSON)); 
-            target.path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
+        m.setId(bean.getId());
+        m.setUsuario(bean.getUsuario());
+        m.setPassword(crypt(bean.getPassword()));
+        m.setNombre(bean.getNombre());
+        m.setApellidos(bean.getApellidos());
+        m.setEdad(bean.getEdad());
+        m.setProvincia(bean.getProvincia());
+        //target.register(UsuarioWriter.class).request().put(Entity.entity(m, MediaType.APPLICATION_JSON)); 
+        target.path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
     }
 
     public void deleteUsuario() {
@@ -97,10 +96,14 @@ public class UsuarioClientBean {
         m.setPassword(crypt(bean.getPassword()));
         m.setNombre(bean.getNombre());
         m.setApellidos(bean.getApellidos());
-        m.setEdad(bean.getEdad());
+        if (bean.getEdad() != null) {
+            m.setEdad(bean.getEdad());
+        }
+        else{
+            m.setEdad(0);
+        }
         m.setProvincia(bean.getProvincia());
         target.register(UsuarioWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
-        //target.register(UsuarioWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
         Grupos g = new Grupos();
         if (bean.isIsOrganizador()) {
             g.setGrupos("organizador");
