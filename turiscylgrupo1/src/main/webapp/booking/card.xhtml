@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form prependId="false" >
+                    <p:steps activeIndex="1" >
+                        <p:menuitem value="Resumen de compra" />
+                        <p:menuitem value="Pago "/>
+                        <p:menuitem value="Comfirmación"/>
+                    </p:steps>
+                    <p:fieldset style="margin-bottom:20px;padding-top: 50px">
+                        <h:panelGrid id="datos" columns="2" cellpadding="5">
+                            <!--<p:graphicImage name="demo/images/godfather/godfather1.jpg" />-->
+                            <h:outputText value="Id de compra "  style="font-weight: bold"/>
+                            <h:outputText value="#{booking.idEntrada}"/>
+                            <h:outputText value="Precio "  style="font-weight: bold"/>
+                            <h:outputText value="#{booking.precio}€"/>
+                            <p:outputLabel for="tarjeta" value="Tarjeta de credito"/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:inputText id="tarjeta" value="#{booking.tarjeta}" required="true" maxlength="16" size="16">
+                                    <f:convertNumber integerOnly="true"/>
+                                    <f:validateLength minimum="16" maximum="16"/> 
+                                </p:inputText>
+                                <p:message for="tarjeta"/>
+                            </h:panelGrid>
+                            <p:outputLabel for="fecha" value="Fecha de expiracion (mes/año)"/> 
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:inputText id="fecha" value="#{booking.fecha_exp}" required="true" maxlength="7" size="7">
+                                    <f:convertDateTime pattern="MM/yyyy"/> 
+                                </p:inputText>
+                                <p:message for="fecha"/>
+                            </h:panelGrid>
+                            <p:outputLabel for="cvv" value="CVV"/> 
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:inputText id="cvv" value="#{booking.CVV}" required="true" maxlength="3" size="3">
+                                    <f:convertNumber integerOnly="true"/>
+                                    <f:validateLength minimum="3" maximum="3"/> 
+                                </p:inputText>
+                                <p:message for="cvv"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:fieldset>
+                    <p:commandButton value="Continuar" action="print" update="datos"/>
+                    <p:commandButton value="Atrás" action="booking" />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
