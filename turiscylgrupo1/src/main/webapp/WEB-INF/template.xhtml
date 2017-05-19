@@ -27,9 +27,6 @@
                     <p:growl id="messages"/>
                     <p:menubar><!-- creamos el menúbar-->
                         <p:menuitem value="Inicio" icon="ui-icon-home" url="/faces/index.xhtml"/>
-                        <c:if test="#{request.isUserInRole('organizador')==true ||request.isUserInRole('turista')==true}">
-                            <p:menuitem value="Contratar oferta" url="/faces/informacion/eventos.xhtml"/>
-                        </c:if>
                         <p:menuitem value="Chat" url="/faces/chat/chat.xhtml" icon="ui-icon-comment"/>
                         <!-- link para ir a parte de organizador-->
                         <c:if test="#{request.isUserInRole('organizador')==true}">
