@@ -9,11 +9,10 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-
             <ui:define name="content">
                 <h:form prependId="false">
                     <p:fieldset legend="Crear evento" style="margin-bottom:20px;padding-top: 50px">
-                        <h:panelGrid columns="3" cellpadding="5" id="addEvento">
+                        <h:panelGrid columns="3" cellpadding="5" id="addEvento" >
                             <!--<p:graphicImage name="demo/images/godfather/godfather1.jpg" />-->
                             <h:outputText value="Nombre de evento: "  style="font-weight: bold"/>
                             <p:inputText id="nombre" value="#{eventoBackingBean.nombre}" required="true">
