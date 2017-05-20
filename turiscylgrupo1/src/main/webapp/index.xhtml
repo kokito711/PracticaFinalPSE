@@ -22,12 +22,12 @@
                             </p:column>
                             <p:column headerText="Fecha de inicio" sortBy="#{item.horaInicio}" filterBy="#{item.horaInicio}" style="text-align: center">
                                 <h:outputText value="#{item.horaInicio}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="Fecha de fin" sortBy="#{item.horaFin}" filterBy="#{item.horaFin}" style="text-align: center">
                                 <h:outputText value="#{item.horaFin}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                                 </h:outputText>
                             </p:column>
                             <c:if test="#{request.remoteUser != null}">

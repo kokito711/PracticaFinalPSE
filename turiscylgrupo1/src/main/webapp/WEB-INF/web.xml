@@ -32,7 +32,7 @@
         <form-login-config>
             <form-login-page>/faces/login.xhtml</form-login-page>
             <!--Página de login-->
-            <form-error-page>/faces/login.xhtml</form-error-page>
+            <form-error-page>/faces/login_error.xhtml</form-error-page>
             <!--Página de error de autenticación-->
         </form-login-config>
     </login-config>

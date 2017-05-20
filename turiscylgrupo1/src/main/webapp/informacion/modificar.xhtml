@@ -4,58 +4,63 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <c:forEach items="#{usuarioClientBean.usuarios}" var="u">
-                    <c:set var ="usuario" scope = "session" value = "#{request.remoteUser}"/>
-                    <c:set var="login" scope="session" value="#{u.usuario}"/>
-                    <c:if test="#{usuario == login}">
-                        <h3>Perfil de #{u.usuario}</h3>
-                        <p:messages />
-                        <h:form prependId="false" >
-                            <p:panelGrid columns="2">
-                                <f:facet name="header">
-                                    <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/img/profile.png" style="max-width: 15%; max-width: 15%;"/>
-                                </f:facet>
-                                <h:outputText value="Nombre: " />
-                                <p:inputText id="nombre" value="#{usuarioBackingBean.nombre}" style="width:100%"/>
-                                <h:outputText value="Apellidos: " />
-                                <p:inputText id="apellidos" value="#{usuarioBackingBean.apellidos}"  style="width:100%"/>
-                                <h:outputText value="Edad: " />
-                                <p:inputText id="edad" value="#{usuarioBackingBean.edad}" style="width:100%"/>
-                                <h:outputText value="Provincia de residencia: " />
-                                <p:inputText id="provincia" value="#{usuarioBackingBean.provincia}" style="width:100%"/>
-                                <h:outputLabel for="password" value="Contraseña: *" />
-                                <p:password id="password" value="#{usuarioBackingBean.password}" feedback="true" match="pwd2" required="true">
-                                    <f:validateLength minimum="8" />
-                                </p:password>
-                                <h:outputLabel for="pwd2" value="Repetir contraseña: *" />
-                                <p:password id="pwd2" value="#{usuarioBackingBean.password}" label="Repetir contraseña" required="true">
-                                    <f:validateLength minimum="8" />
-                                </p:password> 
-                                <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" onclick="window.location.href='./perfil.xhtml'">
-                                    <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert" />
-                                </p:commandButton>
-                                <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="perfil" 
-                                                 update="#{usuarioBackingBean.setId(u.id)}
-                                                 #{usuarioBackingBean.setUsuario(u.usuario)}" 
-                                                 actionListener="#{usuarioClientBean.updateUsuario()}">
-                                    <p:confirm header="Confirmar" message="¿Deseas modificar tu cuenta?" icon="ui-icon-alert" />
-                                </p:commandButton>
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                </p:confirmDialog>
-                            </p:panelGrid>
-                        </h:form>
-                    </c:if>
-                </c:forEach>
+                <h3>Perfil de #{usuarioBackingBean.usuario}</h3>
+
+                <h:form prependId="false" > 
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <h:panelGrid columns="3" style="margin: 0 auto" id="update_usuario">
+                        <f:facet name="header">
+                            <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/img/profile.png" style="max-width: 15%; max-width: 15%;"/>
+                        </f:facet>
+                        <h:outputText value="Nombre: " />
+                        <p:inputText id="nombre" value="#{usuarioBackingBean.nombre}" style="width:100%">
+                            <f:validateLength  maximum="20"/>
+                        </p:inputText>
+                        <p:message for="nombre" display="tooltip"/>
+                        <h:outputText value="Apellidos: " />
+                        <p:inputText id="apellidos" value="#{usuarioBackingBean.apellidos}"  style="width:100%">
+                            <f:validateLength  maximum="30"/>
+                        </p:inputText>
+                        <p:message for="apellidos" display="tooltip"/>
+                        <h:outputText value="Edad: " />
+                        <p:inputText id="edad" value="#{usuarioBackingBean.edad}" style="width:100%"/>
+                        <p:message for="edad" display="tooltip" />
+                        <h:outputText value="Provincia de residencia: " />
+                        <p:inputText id="provincia" value="#{usuarioBackingBean.provincia}" style="width:100%">
+                            <f:validateLength  maximum="30"/>
+                        </p:inputText>
+                        <p:message for="provincia" display="tooltip" />
+                        <h:outputLabel for="password" value="Contraseña:" />
+                        <p:password id="password" value="#{usuarioBackingBean.password}" feedback="true" match="pwd2" required="true">
+                            <f:validateLength minimum="8" />
+                        </p:password>
+                        <p:message for="password"/>
+                        <h:outputLabel for="pwd2" value="Repetir contraseña:" />
+                        <p:password id="pwd2" value="#{usuarioBackingBean.password}" label="Repetir contraseña" required="true">
+                            <f:validateLength minimum="8" />
+                        </p:password> 
+                        <p:message for="pwd2"/>
+                        <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" onclick="window.location.href = './perfil.xhtml'" actionListener="#{usuarioClientBean.clean()}">
+                            <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert"/>
+                        </p:commandButton>
+                        <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="perfil" 
+                                         update="messages" 
+                                         actionListener="#{usuarioClientBean.updateUsuario()}">
+                            <p:confirm header="Confirmar" message="¿Deseas modificar tu cuenta?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </h:panelGrid>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
             </ui:define>
         </ui:composition>
 
