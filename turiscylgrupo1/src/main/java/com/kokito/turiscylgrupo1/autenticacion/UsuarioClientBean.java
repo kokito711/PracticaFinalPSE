@@ -74,6 +74,7 @@ public class UsuarioClientBean {
         m.setProvincia(bean.getProvincia());
         //target.register(UsuarioWriter.class).request().put(Entity.entity(m, MediaType.APPLICATION_JSON)); 
         target.path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
+        clean();
     }
 
     public void deleteUsuario() {
@@ -112,6 +113,15 @@ public class UsuarioClientBean {
         }
         g.setUsuario(bean.getUsuario());
         target_aux.register(GruposWriter.class).request().post(Entity.entity(g, MediaType.APPLICATION_JSON));
+    }
+    
+    //método que limpia el bean
+    public void clean(){
+        bean.setNombre(null);
+        bean.setApellidos(null);
+        bean.setEdad(null);
+        bean.setProvincia(null);
+        bean.setPassword(null);
     }
     //Métodos para encriptar contraseña en MD5   
 
