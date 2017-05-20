@@ -16,9 +16,7 @@ public class EventoBackingBean implements Serializable {
     private String nombre;
     @Size(max = 65535)
     private String descripcion;
-    @Future
     private Date fecha_inicio;
-    @Future
     private Date fecha_fin;
 
     public Integer getId() {

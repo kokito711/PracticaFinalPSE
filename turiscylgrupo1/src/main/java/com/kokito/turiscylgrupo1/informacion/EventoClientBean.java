@@ -53,12 +53,13 @@ public class EventoClientBean {
         m.setHoraInicio(bean.getFecha_inicio());
         m.setHoraFin(bean.getFecha_fin());
         m.setDescripcion(bean.getDescripcion());
-        //target.register(UsuarioWriter.class).request().put(Entity.entity(m, MediaType.APPLICATION_JSON)); 
         target.register(EventoWriter.class).path("{id}").resolveTemplate("id", bean.getId()).request().put(Entity.entity(m, MediaType.APPLICATION_JSON));
+        clean();
     }
 
     public void deleteEvento() {
         target.path("{id}").resolveTemplate("id", bean.getId()).request().delete();
+        clean();
     }
 
     public void addEvento() {
@@ -69,8 +70,17 @@ public class EventoClientBean {
         m.setHoraInicio(bean.getFecha_inicio());
         m.setHoraFin(bean.getFecha_fin());
         target.register(EventoWriter.class).request().post(Entity.entity(m, MediaType.APPLICATION_JSON));
+        clean();
     }
     public Date getCurrentDate(){
         return new Date();
+    }
+    
+    public void clean(){
+        bean.setNombre(null);
+        bean.setId(null);
+        bean.setFecha_inicio(null);
+        bean.setFecha_fin(null);
+        bean.setDescripcion(null);
     }
 }
