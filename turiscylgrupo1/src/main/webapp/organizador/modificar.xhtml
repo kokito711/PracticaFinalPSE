@@ -12,12 +12,13 @@
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
+                 <c:set var = "e" scope = "session" value="#{eventoClientBean.evento}"/>
                 <h:form prependId="false" id="modificar">
-                    <p:fieldset legend="#{eventoClientBean.evento.nombre}" style="margin-bottom:20px;padding-top: 50px">
+                    <p:fieldset legend="#{e.nombre}" style="margin-bottom:20px;padding-top: 50px">
                         <h:panelGrid columns="2" cellpadding="5">
                             <!--<p:graphicImage name="demo/images/godfather/godfather1.jpg" />-->             
                             <h:outputText value="ID de evento: "  style="font-weight: bold"/>
-                            <h:outputText value="#{eventoClientBean.evento.id}"/>
+                            <h:outputText value="#{e.id}"/>
                             <h:outputText value="Nombre de evento: *"  style="font-weight: bold"/>
                             <p:inputText id="nombre" value="#{eventoBackingBean.nombre}" required="true"/>
                             <h:outputText value="El evento comienza el día: "  style="font-weight: bold"/>
@@ -30,7 +31,7 @@
                             </p:calendar>
                             <h:outputText value="Descripción del evento" style="font-weight: bold"/>
                             <p:inputTextarea rows="30" cols="50" counter="display" maxlength="65535" counterTemplate="{0} characters remaining." autoResize="false" 
-                                             id="descripcion" value="#{eventoBackingBean.descripcion}" placeholder="#{eventoClientBean.evento.descripcion}" />
+                                             id="descripcion" value="#{eventoBackingBean.descripcion}" />
                             <h:outputText id="display" />
                             <h:form prependId="false">
                                 <h:panelGrid columns="2" cellpadding="5">
@@ -38,7 +39,6 @@
                                         <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert" />
                                     </p:commandButton>
                                     <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="evento" 
-                                                     update="#{eventoBackingBean.setId(eventoClientBean.evento.id)}" 
                                                      actionListener="#{eventoClientBean.updateEvento()}">
                                         <p:confirm header="Confirmar" message="¿Estas seguro de realizar estos cambios?" icon="ui-icon-alert" />
                                     </p:commandButton>
