@@ -26,13 +26,11 @@
                             <h:outputText value="El evento comienza el día: "  style="font-weight: bold"/>
                             <p:calendar id="fecha_inicio" value="#{eventoBackingBean.fecha_inicio}" mindate="#{eventoClientBean.currentDate}" required="true">
                                 <p:ajax event="dateSelect" update="fecha_fin"/>
-                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                             </p:calendar>
                             <p:message for="fecha_inicio"/>
                             <h:outputText value="El evento finaliza el día: " style="font-weight: bold"/>
                             <p:calendar id="fecha_fin" value="#{eventoBackingBean.fecha_fin}" mindate="#{eventoBackingBean.fecha_inicio}" disabled="#{empty eventoBackingBean.fecha_inicio}" required="true">
                                 <p:ajax event="dateSelect" update="fecha_inicio"/>
-                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                             </p:calendar>
                             <p:message for="fecha_fin"/>
                             <h:outputText value="Descripción del evento" style="font-weight: bold"/>
@@ -46,7 +44,7 @@
                             </h:panelGrid>
                             <h:form prependId="false">
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" action="evento " actionListener="#{eventoClientBean.clean()}">
+                                    <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" action="evento" actionListener="#{eventoClientBean.clean()}">
                                         <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert"/>
                                     </p:commandButton>
                                     <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="evento" update="updateEvento "

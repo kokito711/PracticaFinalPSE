@@ -3,6 +3,7 @@ package com.kokito.turiscylgrupo1.LazyTable;
 import com.kokito.turiscylgrupo1.entities.Evento;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class LazyEventoDataModel extends LazyDataModel<Evento> {
                 for (Iterator<String> it = filters.keySet().iterator(); it.hasNext();) {
                     try {
                         String filterProperty = it.next();
-                        Object filterValue = filters.get(filterProperty);
+                        Object filterValue= filters.get(filterProperty);
 
                         String fieldValue = "";
 
@@ -58,7 +59,7 @@ public class LazyEventoDataModel extends LazyDataModel<Evento> {
                                 fieldValue = String.valueOf(evento.getNombre());
                                 break;
                             case "horaInicio":
-                                fieldValue = String.valueOf(evento.getHoraInicio());
+                                fieldValue = Date.from(evento.getHoraInicio().toInstant()).toString();
                                 break;
                             case "horaFin":
                                 fieldValue = String.valueOf(evento.getHoraFin());
@@ -66,7 +67,7 @@ public class LazyEventoDataModel extends LazyDataModel<Evento> {
                         }
 
                         //String fieldValue = String.valueOf(evento.getClass().getField(filterProperty).get(evento));
-                        if (filterValue == null || fieldValue.startsWith(filterValue.toString())) {
+                        if (filterValue == null || fieldValue.contains(filterValue.toString())) {
                             match = true;
                         } else {
                             match = false;

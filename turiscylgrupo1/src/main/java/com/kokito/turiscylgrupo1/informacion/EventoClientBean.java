@@ -60,6 +60,7 @@ public class EventoClientBean {
     public void deleteEvento() {
         target.path("{id}").resolveTemplate("id", bean.getId()).request().delete();
         clean();
+        bean.setId(null);
     }
 
     public void addEvento() {
@@ -78,7 +79,6 @@ public class EventoClientBean {
     
     public void clean(){
         bean.setNombre(null);
-        bean.setId(null);
         bean.setFecha_inicio(null);
         bean.setFecha_fin(null);
         bean.setDescripcion(null);
