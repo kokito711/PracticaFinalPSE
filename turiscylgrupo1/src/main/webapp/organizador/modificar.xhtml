@@ -12,33 +12,44 @@
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                 <c:set var = "e" scope = "session" value="#{eventoClientBean.evento}"/>
+                <c:set var = "e" scope = "session" value="#{eventoClientBean.evento}"/>
                 <h:form prependId="false" id="modificar">
                     <p:fieldset legend="#{e.nombre}" style="margin-bottom:20px;padding-top: 50px">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <!--<p:graphicImage name="demo/images/godfather/godfather1.jpg" />-->             
-                            <h:outputText value="ID de evento: "  style="font-weight: bold"/>
-                            <h:outputText value="#{e.id}"/>
+                        <h:outputText value="ID de evento: "  style="font-weight: bold"/>
+                        <h:outputText value="#{e.id}"/>
+                        <h:panelGrid columns="3" cellpadding="5" id="updateEvento">
                             <h:outputText value="Nombre de evento: *"  style="font-weight: bold"/>
-                            <p:inputText id="nombre" value="#{eventoBackingBean.nombre}" required="true"/>
+                            <p:inputText id="nombre" value="#{eventoBackingBean.nombre}" required="true">
+                                <f:validateLength minimum="3" maximum="32"/>
+                            </p:inputText>
+                            <p:message for="nombre"/>
                             <h:outputText value="El evento comienza el día: "  style="font-weight: bold"/>
                             <p:calendar id="fecha_inicio" value="#{eventoBackingBean.fecha_inicio}" mindate="#{eventoClientBean.currentDate}" required="true">
                                 <p:ajax event="dateSelect" update="fecha_fin"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                             </p:calendar>
+                            <p:message for="fecha_inicio"/>
                             <h:outputText value="El evento finaliza el día: " style="font-weight: bold"/>
-                            <p:calendar id="fecha_fin" value="#{eventoBackingBean.fecha_fin}" mindate="#{eventoBackingBean.fecha_inicio}" disabled="#{empty eventoBackingBean.fecha_inicio}">
+                            <p:calendar id="fecha_fin" value="#{eventoBackingBean.fecha_fin}" mindate="#{eventoBackingBean.fecha_inicio}" disabled="#{empty eventoBackingBean.fecha_inicio}" required="true">
                                 <p:ajax event="dateSelect" update="fecha_inicio"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/>
                             </p:calendar>
+                            <p:message for="fecha_fin"/>
                             <h:outputText value="Descripción del evento" style="font-weight: bold"/>
                             <p:inputTextarea rows="30" cols="50" counter="display" maxlength="65535" counterTemplate="{0} characters remaining." autoResize="false" 
-                                             id="descripcion" value="#{eventoBackingBean.descripcion}" />
-                            <h:outputText id="display" />
+                                             id="descripcion" value="#{eventoBackingBean.descripcion}" required="true">
+                                <f:validateLength minimum="3"/>
+                            </p:inputTextarea>
+                            <h:panelGrid columns="2">
+                                <p:message for="descripcion"/>
+                                <h:outputText id="display"/>
+                            </h:panelGrid>
                             <h:form prependId="false">
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" action="eventos">
-                                        <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert" />
+                                    <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" action="evento " actionListener="#{eventoClientBean.clean()}">
+                                        <p:confirm header="Deshacer cambios" message="¿Quieres descartar los cambios realizados?" icon="ui-icon-alert"/>
                                     </p:commandButton>
-                                    <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="evento" 
+                                    <p:commandButton value="Guardar Cambios" icon="ui-icon-trashui-icon-disk" action="evento" update="updateEvento "
                                                      actionListener="#{eventoClientBean.updateEvento()}">
                                         <p:confirm header="Confirmar" message="¿Estas seguro de realizar estos cambios?" icon="ui-icon-alert" />
                                     </p:commandButton>
