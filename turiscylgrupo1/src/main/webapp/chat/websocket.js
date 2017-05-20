@@ -55,15 +55,16 @@ websocket.onclose = function (evt) {
 //Funciones a las que llaman los listeners
 
 function onOpen() {
-    writeToScreen("CONNECTED");
+    //writeToScreen("CONNECTED");
 }
 function onClose() {
-    writeToScreen("DISCONNECTED");
+   // writeToScreen("DISCONNECTED");
 }
 function onMessage(evt) {
-    writeToScreen("RECEIVED: " + evt.data);
+    //writeToScreen("RECEIVED: " + evt.data);
     if (evt.data.indexOf("joined") !== -1) {
         users.innerHTML += evt.data.substring(0, evt.data.indexOf("joined")) + "\n";
+        chatlog.innerHTML += evt.data.substring(0, evt.data.indexOf("joined")) + " se ha unido \n";
     } else {
         chatlog.innerHTML += evt.data + "\n";
     }

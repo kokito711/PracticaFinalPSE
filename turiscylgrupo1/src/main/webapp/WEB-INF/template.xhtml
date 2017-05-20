@@ -31,7 +31,7 @@
                         <!-- link para ir a parte de organizador-->
                         <c:if test="#{request.isUserInRole('organizador')==true}">
                             <p:submenu label="Gestión  de eventos" icon="ui-icon-wrench" >
-                                <p:menuitem value="Añadir evento" url="/faces/organizador/addEvento.xhtml" />
+                                <p:menuitem value="Añadir evento" url="/faces/organizador/addEvento.xhtml"/>
                                 <p:menuitem value="Ver eventos" url="/faces/organizador/eventos.xhtml" />
                             </p:submenu>
                         </c:if>

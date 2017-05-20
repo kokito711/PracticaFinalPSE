@@ -19,11 +19,11 @@
                                 <!--<p:graphicImage name="demo/images/godfather/godfather1.jpg" />-->
                                 <h:outputText value="El evento comienza el día: "  style="font-weight: bold"/>
                                 <h:outputText value="#{e.horaInicio}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/> 
                                 </h:outputText>
                                 <h:outputText value="El evento finaliza el día: " style="font-weight: bold"/>
                                 <h:outputText value="#{e.horaFin}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/> 
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Madrid" type="date"/> 
                                 </h:outputText>
                                 <h:outputText value="Descripción del evento" style="font-weight: bold"/>
                                 <h:outputText value="#{e.descripcion}" style="text-align: justify;"/>

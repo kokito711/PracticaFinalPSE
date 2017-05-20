@@ -17,7 +17,7 @@
                     <c:set var="login" scope="session" value="#{u.usuario}"/>
                     <c:if test="#{usuario == login}">
                         <h3>Perfil de #{u.usuario}</h3>
-                        <p:panelGrid columns="2">
+                        <p:panelGrid columns="2" style="margin: 0 auto">
                             <f:facet name="header">
                                 <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/img/profile.png" style="max-width: 15%; max-width: 15%;"/>
                             </f:facet>
@@ -30,7 +30,12 @@
                             <h:outputText value="Provincia de residencia: " />
                             <h:outputText value="#{u.provincia}"/>
                             <h:form prependId="false">
-                                <p:commandButton value="Modificar" icon="ui-icon-pencil" action="modificar"/>
+                                <p:commandButton value="Modificar" icon="ui-icon-pencil" action="modificar"
+                                                 update="#{usuarioBackingBean.setId(u.id)}
+                                                 #{usuarioBackingBean.setNombre(u.nombre)}
+                                                 #{usuarioBackingBean.setEdad(u.edad)}
+                                                 #{usuarioBackingBean.setProvincia(u.provincia)}
+                                                 #{usuarioBackingBean.setPassword(u.password)}"/>
                                 <p:commandButton value="Eliminar" icon="ui-icon-trash" 
                                                  update="#{usuarioBackingBean.setId(u.id)}#{usuarioBackingBean.setUsuario(u.usuario)}" 
                                                  actionListener="#{usuarioClientBean.deleteUsuario()}" 
