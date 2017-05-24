@@ -8,9 +8,7 @@ package com.kokito.turiscylgrupo1.autenticacion;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.persistence.Basic;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
