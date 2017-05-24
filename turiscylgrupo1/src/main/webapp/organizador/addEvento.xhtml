@@ -40,11 +40,15 @@
                             </h:panelGrid>
                             <h:form prependId="false">
                                 <h:panelGrid columns="2" cellpadding="5">
-                                    <p:commandButton value="Volver" icon="ui-icon-arrowrefresh-1-w" action="evento">
-                                        <p:confirm header="Cancelar evento" message="¿Quieres descartar el evento?" icon="ui-icon-alert" />
-                                    </p:commandButton>
+                                    <p:button value="Volver" icon="ui-icon-arrowrefresh-1-w" href="http://localhost:8080/turiscylgrupo1" />
+                                        <!--<p:confirm header="Cancelar evento" message="¿Quieres descartar el evento?" icon="ui-icon-alert" />
+                                    </p:commandButton>-->
                                     <p:commandButton value="Crear evento" icon="ui-icon-trashui-icon-disk" action="eventos" 
                                                      actionListener="#{eventoClientBean.addEvento()}" update="addEvento"/>
+                                    <!--<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>                            
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>-->
                                 </h:panelGrid>
                             </h:form>
                         </h:panelGrid>

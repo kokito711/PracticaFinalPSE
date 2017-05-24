@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Size;
 
 @Named
